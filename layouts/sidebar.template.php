@@ -21,6 +21,6 @@
     </div>
     <div class="sb-sidenav-footer">
         <div class="small">Accedió como:</div>
-        <?= $_SESSION['nombre'] ?>
+        <?= $_SESSION['name'] ?>
     </div>
 </nav>

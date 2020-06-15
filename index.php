@@ -34,7 +34,7 @@
 
                                             <div class="form-group">
                                             	<label class="small mb-1" for="inputPassword">Password</label>
-                                            	<input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" name="password"/>
+                                            	<input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" name="password" required="" />
                                             </div> 
 
                                             <div class="form-group">

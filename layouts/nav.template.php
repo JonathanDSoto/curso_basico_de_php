@@ -8,7 +8,7 @@
             <ul class="navbar-nav ml-auto ml-md-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    	<?= $_SESSION['nombre'] ?> <?= $_SESSION['apellido'] ?> 
+                    	<?= $_SESSION['name'] ?> <?= $_SESSION['lastname'] ?> 
                     	<i class="fas fa-user fa-fw"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
