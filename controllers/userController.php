@@ -6,7 +6,7 @@
 		# code...
 	}
 
-	//obtiene todos los cursos existentes
+	//obtiene todos los usuarios existentes
 	class CourseController
 	{
 		public function get()
@@ -14,7 +14,7 @@
 			$conn = connect();
 			if (!$conn->connect_error) {
 				
-				$query = "select * from courses";
+				$query = "select * from users";
 				$prepared_query = $conn->prepare($query);
 				$prepared_query->execute();
 

@@ -19,6 +19,7 @@
 		}
 	}
 
+	//se deslogea y destruye la sesión
 	if (isset($_GET)) {
 		if (isset($_GET['logout'])) {
 			session_destroy();
@@ -26,6 +27,7 @@
 		}
 	}
 
+	//busca los datos del usuario y los almacena en la sesión
 	class AuthController
 	{
 		private $example = "valor";
