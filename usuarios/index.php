@@ -34,6 +34,7 @@
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>Rol</th> 
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead> 
                                         <tbody>
@@ -55,6 +56,7 @@
                                                 <th>Nombre</th>
                                                 <th>Apellido</th>
                                                 <th>Rol</th> 
+                                                <th>Acciones</th>
                                             </tr>
                                         </tfoot>
                                     </table>

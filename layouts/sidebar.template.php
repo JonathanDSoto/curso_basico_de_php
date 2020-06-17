@@ -3,14 +3,15 @@
         <div class="nav">
 
             <div class="sb-sidenav-menu-heading">Core</div>
-            <a class="nav-link" href="<?= BASE_PATH."cursos" ?>" >
+
+            <a class="nav-link <?= (strpos($actual_link, 'cursos'))?'active':'' ?> " href="<?= BASE_PATH."cursos" ?>" >
                 <div class="sb-nav-link-icon">
                     <i class="fas fa-tachometer-alt"></i>
                 </div>
                 Cursos
             </a >
 
-            <a class="nav-link" href="<?= BASE_PATH."usuarios" ?>" >
+            <a class="nav-link <?= (strpos($actual_link, 'usuarios'))?'active':'' ?>" href="<?= BASE_PATH."usuarios" ?>" >
                 <div class="sb-nav-link-icon">
                     <i class="fas fa-users"></i>
                 </div>

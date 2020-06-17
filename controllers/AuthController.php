@@ -37,6 +37,8 @@
 			$conn = connect();
 			if (!$conn->connect_error) {
 				if ($email!="" && $password!="") {
+
+					$password = md5($password.'pollito');
 					
 					$query = "select * from users where email = ? and password = ?";
 					$prepared_query = $conn->prepare($query);

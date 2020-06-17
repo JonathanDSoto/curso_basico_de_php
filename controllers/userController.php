@@ -7,7 +7,7 @@
 	}
 
 	//obtiene todos los usuarios existentes
-	class CourseController
+	class UserController
 	{
 		public function get()
 		{
