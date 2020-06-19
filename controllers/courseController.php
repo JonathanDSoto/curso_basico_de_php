@@ -2,6 +2,8 @@
 	include "config.php";  
 	include "connectionController.php";
 
+	
+
 	if (isset($_POST['action'])) {
 		if (isset($_POST['token']) && $_POST['token'] == $_SESSION['token']) {
 
@@ -20,7 +22,7 @@
 		}
 	}
 
-	//obtiene todos los cursos existentes
+	//crud
 	class CourseController
 	{
 

@@ -3,6 +3,7 @@
     include "../controllers/userController.php";
     $userController = new UserController();
     $users = $userController->get();	
+    $bread = $userController->bread; 
 ?>
 
 <!DOCTYPE html>
@@ -70,6 +71,77 @@
                 <?php include "../layouts/footer.template.php"; ?>
             </div>
         </div>
+
+
+          <!-- Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Añadir nuevo usuario
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <form action="<?= BASE_PATH ?>/controllers/userController.php" method="post"> 
+                  <div class="modal-body">
+                    
+
+                      <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control" id="name" placeholder="" name="name" required="">
+                      </div>
+                       
+                      <div class="form-group">
+                        <label for="description">Apellido</label>
+                        <textarea class="form-control" id="lastname" name="lastname" rows="3" required=""></textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="cover">Direccion</label>
+                        <input type="text" class="form-control" id="address" placeholder="" name="address" required="">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="cover">Numero de telefono</label>
+                        <input type="text" class="form-control" id="phone_numbe" placeholder="" name="phone_numbe" required="">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="cover">Email</label>
+                        <input type="text" class="form-control" id="address" placeholder="" name="address" required="">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="cover">Contraseña</label>
+                        <input type="text" class="form-control" id="password" placeholder="" name="password" required="">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="status">Rol</label>
+                        <select class="form-control" id="role" name="role" required="">
+                            <option selected="" disabled=""> Seleccione uno </option>
+                          <option value="1" >Alumno</option>
+                          <option value="0" >Instructor</option> 
+                        </select>
+                      </div>
+                     
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <input type="hidden" value="add" name="action">
+                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                  </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
         <?php include "../layouts/scripts.template.php"; ?>
     </body>
 </html>

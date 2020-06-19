@@ -3,12 +3,37 @@
 	include "connectionController.php";
 
 	if (isset($_POST['action'])) {
-		# code...
+		if (isset($_POST['token']) && $_POST['token'] == $_SESSION['token']) {
+
+			$courseController = new CourseController();
+
+			switch ($_POST['action']) {
+				case 'add':
+					$name = strip_tags($_POST['name']);
+					$lastname = strip_tags($_POST['lastname']);
+					$address = strip_tags($_POST['address']);
+					$phone_number = strip_tags($_POST['phone_number']);
+					$email = strip_tags($_POST['email']);
+					$password = strip_tags($_POST['password']);
+					$role = strip_tags($_POST['role']);
+
+					$password = md5($password.'pollito');
+
+					$courseController->store($name,$lastname,$address,$phone_number,$email,$password,$role);
+				break; 
+			}
+		}
 	}
 
 	//obtiene todos los usuarios existentes
 	class UserController
 	{
+		public $bread = array(
+			"main_title" => "Usuarios",
+			"second_level" => "",
+			"add_button" => true
+		);
+
 		public function get()
 		{
 			$conn = connect();
@@ -29,5 +54,30 @@
 			}else
 				return array();
 		}
+
+		public function store($name,$lastname,$address,$phone_number,$email,$password,$role)
+		{
+			$conn = connect();
+			if (!$conn->connect_error) {
+
+				if ($name!="" && $lastname!="" && $address!="" && $phone_number!="" && $email!="" && $password!="" && $role!="") {
+					
+					$query = "insert into users (name,lastname,address,phone_number,email,password,role) values(?,?,?,?,?.?,?)";
+					$prepared_query = $conn->prepare($query);
+					$prepared_query->bind_param('ssssssi',$name,$lastname,$address,$phone_number,$email,$password,$role);
+					if ($prepared_query->execute()) {
+						
+						header("Location:".BASE_PATH.'usuarios/?ok');
+
+					}else
+						header("Location:".BASE_PATH.'usuarios/?error');
+
+				}else
+					header("Location:".BASE_PATH.'usuarios/?error');
+
+			}else
+				header("Location:".BASE_PATH.'usuarios/?error');
+		}
+	}
 	}
 ?>
