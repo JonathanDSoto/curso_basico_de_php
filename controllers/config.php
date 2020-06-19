@@ -6,7 +6,7 @@
 	
 	//se define una ruta base
 	if (!defined("BASE_PATH") ) {
-		define("BASE_PATH","http://localhost:8888/");
+		define("BASE_PATH","http://localhost/class/");
 	} 
 
 	//se genera un token

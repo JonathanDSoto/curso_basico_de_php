@@ -24,3 +24,31 @@
     </li>
 	<?php endif; ?>
 </ol>
+
+<?php if (isset($_SESSION['status']) && $_SESSION['status']!= ""): ?>
+<div class="row">
+	<div class="col"> 
+		<?php if ($_SESSION['status']== "error"): ?> 
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  <strong>Ha ocurrido un error!</strong> <?= $_SESSION['message'] ?>
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<?php  endif; ?>
+
+		<?php if ($_SESSION['status']== "success"): ?> 
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+		  <strong>Proceso completado correctamente!</strong> <?= $_SESSION['message'] ?>
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<?php endif; ?>
+	</div>
+</div>
+<?php 
+	unset($_SESSION['status']);
+	unset($_SESSION['message']);
+?>
+<?php endif; ?>

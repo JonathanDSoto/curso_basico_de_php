@@ -18,6 +18,15 @@
 
 					$courseController->store($name,$description,$cover,$status);
 				break; 
+				case 'update':
+					$name = strip_tags($_POST['name']);
+					$description = strip_tags($_POST['description']);
+					$cover = strip_tags($_POST['cover']);
+					$status = strip_tags($_POST['status']);
+					$id = strip_tags($_POST['id']);
+
+					$courseController->update($name,$description,$cover,$status,$id);
+				break;
 			}
 		}
 	}
@@ -64,17 +73,76 @@
 					$prepared_query = $conn->prepare($query);
 					$prepared_query->bind_param('sssi',$name,$description,$cover,$status);
 					if ($prepared_query->execute()) {
+
+						$_SESSION['status'] = 'success';
+						$_SESSION['message'] = 'Registro guardado exitosamente.';
 						
-						header("Location:".BASE_PATH.'cursos/?ok');
+						header("Location:".BASE_PATH.'cursos/');
 
-					}else
-						header("Location:".BASE_PATH.'cursos/?error');
+					}else{
+						
+						$_SESSION['status'] = 'error';
+						$_SESSION['message'] = 'ocurrio un error durante el proceso de guardado';
 
-				}else
-					header("Location:".BASE_PATH.'cursos/?error');
+						header("Location:".BASE_PATH.'cursos/');
+					}
 
-			}else
-				header("Location:".BASE_PATH.'cursos/?error');
+				}else{ 
+
+					$_SESSION['status'] = 'error';
+					$_SESSION['message'] = 'verifique la información del formulario';
+
+					header("Location:".BASE_PATH.'cursos/');
+				}
+
+			}else{
+				$_SESSION['status'] = 'error';
+				$_SESSION['message'] = 'verifique la conexión a la base de datos';
+
+				header("Location:".BASE_PATH.'cursos/');
+			}
+		}
+
+		public function update($name,$description,$cover,$status,$id)
+		{
+			$conn = connect();
+			if (!$conn->connect_error) {
+				
+				if ($name!="" && $description!="" && $cover!="" && $status!="" && $id!="") {
+
+					$query = "update courses set name = ?, description = ?, cover = ?, status = ? where id = ?";
+					$prepared_query = $conn->prepare($query);
+					$prepared_query->bind_param('sssii',$name,$description,$cover,$status,$id);
+					if ($prepared_query->execute()) {
+
+						$_SESSION['status'] = 'success';
+						$_SESSION['message'] = 'Registro actualizado exitosamente.';
+						
+						header("Location:".BASE_PATH.'cursos/');
+
+					}else{
+						
+						$_SESSION['status'] = 'error';
+						$_SESSION['message'] = 'ocurrio un error durante el proceso de actualizado';
+
+						header("Location:".BASE_PATH.'cursos/');
+					}
+
+
+				}else{ 
+
+					$_SESSION['status'] = 'error';
+					$_SESSION['message'] = 'verifique la información del formulario';
+
+					header("Location:".BASE_PATH.'cursos/');
+				}
+
+			}else{
+				$_SESSION['status'] = 'error';
+				$_SESSION['message'] = 'verifique la conexión a la base de datos';
+
+				header("Location:".BASE_PATH.'cursos/');
+			}
 		}
 	}
 ?>

@@ -46,7 +46,10 @@
                                                 <td><?= $course['description'] ?></td>
                                                 <td><?= $course['cover'] ?></td>
                                                 <td>
-                                                    
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal" onclick="editar('<?= $course['name'] ?>','<?= $course['description'] ?>','<?= $course['cover'] ?>',<?= $course['status'] ?>,<?= $course['id'] ?>)">
+                                                        <i class="fa fa-pencil"></i>
+                                                        Editar
+                                                    </button>
                                                 </td> 
                                             </tr>  
                                             <?php endforeach ?> 
@@ -127,9 +130,76 @@
           </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Editar curso
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <form action="<?= BASE_PATH ?>/controllers/courseController.php" method="post" name="formulario_actualizar" > 
+                  <div class="modal-body">
+                    
+
+                      <div class="form-group">
+                        <label for="name">Nombre del curso</label>
+                        <input type="text" class="form-control" id="editar_name" placeholder="" name="name" required="">
+                      </div>
+                       
+                      <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <textarea class="form-control" id="editar_description" name="description" rows="3" required=""></textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="cover">Portada del curso</label>
+                        <input type="text" class="form-control" id="editar_cover" placeholder="" name="cover" required="">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="status">Estado</label>
+                        <select class="form-control" id="editar_status" name="status" required="">
+                            <option selected="" disabled=""> Seleccione uno </option>
+                          <option value="1" >Activo</option>
+                          <option value="0" >Inactivo</option> 
+                        </select>
+                      </div>
+                     
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <input type="hidden" value="update" name="action">
+                    <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                    <input type="hidden" id="editar_id" name="id">
+                  </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
         <?php include "../layouts/scripts.template.php"; ?>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="../assets/demo/datatables-demo.js"></script>
+        <script type="text/javascript">
+            function editar(name1,description1,cover1,status1,id1){
+
+                var formulario = document.formulario_actualizar;
+
+                formulario.name.value = name1;
+                formulario.description.value = description1;
+                formulario.cover.value = cover1;
+                formulario.status.value = status1;
+                formulario.id.value  = id1;
+            }
+        </script>
     </body>
 </html>

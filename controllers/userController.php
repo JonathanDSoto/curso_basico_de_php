@@ -5,7 +5,7 @@
 	if (isset($_POST['action'])) {
 		if (isset($_POST['token']) && $_POST['token'] == $_SESSION['token']) {
 
-			$courseController = new CourseController();
+			$userController = new UserController();
 
 			switch ($_POST['action']) {
 				case 'add':
@@ -19,7 +19,7 @@
 
 					$password = md5($password.'pollito');
 
-					$courseController->store($name,$lastname,$address,$phone_number,$email,$password,$role);
+					$userController->store($name,$lastname,$address,$phone_number,$email,$password,$role);
 				break; 
 			}
 		}
@@ -62,7 +62,7 @@
 
 				if ($name!="" && $lastname!="" && $address!="" && $phone_number!="" && $email!="" && $password!="" && $role!="") {
 					
-					$query = "insert into users (name,lastname,address,phone_number,email,password,role) values(?,?,?,?,?.?,?)";
+					$query = "insert into users (name,lastname,address,phone_number,email,password,role) values(?,?,?,?,?,?,?)";
 					$prepared_query = $conn->prepare($query);
 					$prepared_query->bind_param('ssssssi',$name,$lastname,$address,$phone_number,$email,$password,$role);
 					if ($prepared_query->execute()) {
@@ -79,5 +79,5 @@
 				header("Location:".BASE_PATH.'usuarios/?error');
 		}
 	}
-	}
+	
 ?>
