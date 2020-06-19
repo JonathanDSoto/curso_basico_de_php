@@ -1,23 +1,72 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Jun 17, 2020 at 09:59 PM
--- Server version: 5.7.26
--- PHP Version: 7.4.2
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 20-06-2020 a las 01:11:01
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Database: `class`
+-- Base de datos: `class`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `courses`
+--
+
+CREATE TABLE `courses` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `cover` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `courses`
+--
+
+INSERT INTO `courses` (`id`, `name`, `description`, `cover`, `status`) VALUES
+(1, 'Php básico ', 'curso de php para principantes', 'portada.jpg', 1),
+(2, 'Php básico 1', 'curso de php para principantes1', 'portada.jpg 1', 1),
+(3, 'Php básico ', 'curso de php para principantes', 'portada.jpg', 1),
+(4, 'curso de prueba ', 'blablabla', 'cover.jpg', 1),
+(5, 'curso de prueba ', 'blablabla', 'cover.jpg', 1),
+(6, 'asdasd', 'asdasd', 'asdasd', 0),
+(7, 'asd', 'asdasd', 'asdasd', 1),
+(8, 'asd', 'asd', 'asd', 1),
+(9, 'asd', 'asd', 'asd', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `lessons`
+--
+
+CREATE TABLE `lessons` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
@@ -32,7 +81,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `lastname`, `address`, `phone_number`, `email`, `password`, `role`) VALUES
@@ -41,21 +90,38 @@ INSERT INTO `users` (`id`, `name`, `lastname`, `address`, `phone_number`, `email
 (3, 'Pedro ', 'Sanchez ', 'castillo encerrado 123123', '19209421', 'sanpedro_link@gmail.com', '1234', '2');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `users`
+-- Indices de la tabla `courses`
 --
-ALTER TABLE `users`
+ALTER TABLE `courses`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indices de la tabla `lessons`
+--
+ALTER TABLE `lessons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT de la tabla `courses`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `courses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `lessons`
+--
+ALTER TABLE `lessons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

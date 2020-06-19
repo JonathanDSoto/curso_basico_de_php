@@ -3,7 +3,7 @@ Práctica de usuarios y cursos CRUD con PHP módulos básicos y acción como log
 
 ![status](https://img.shields.io/badge/status-running-green.svg?colorB=00C106)
 ![readme](https://img.shields.io/badge/readme-OK-green.svg?colorB=00C106)
-![commits](https://img.shields.io/badge/commits-1-blue.svg)
+![commits](https://img.shields.io/badge/commits-9-blue.svg)
  
  ---
  ## Estructura del proyecto
