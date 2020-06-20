@@ -107,17 +107,17 @@
 
                       <div class="form-group">
                         <label for="cover">Numero de telefono</label>
-                        <input type="text" class="form-control" id="phone_numbe" placeholder="" name="phone_numbe" required="">
+                        <input type="text" class="form-control" id="phone_number" placeholder="" name="phone_number" required="">
                       </div>
 
                       <div class="form-group">
                         <label for="cover">Email</label>
-                        <input type="text" class="form-control" id="address" placeholder="" name="address" required="">
+                        <input type="text" class="form-control" id="email" placeholder="" name="email" required="">
                       </div>
 
                       <div class="form-group">
                         <label for="cover">Contraseña</label>
-                        <input type="text" class="form-control" id="password" placeholder="" name="password" required="">
+                        <input type="password" class="form-control" id="password" placeholder="" name="password" required="">
                       </div>
 
                       <div class="form-group">
@@ -125,7 +125,7 @@
                         <select class="form-control" id="role" name="role" required="">
                             <option selected="" disabled=""> Seleccione uno </option>
                           <option value="1" >Alumno</option>
-                          <option value="0" >Instructor</option> 
+                          <option value="2" >Instructor</option> 
                         </select>
                       </div>
                      

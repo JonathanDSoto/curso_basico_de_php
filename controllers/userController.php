@@ -44,10 +44,10 @@
 				$prepared_query->execute();
 
 				$results = $prepared_query->get_result();
-				$courses = $results->fetch_all(MYSQLI_ASSOC); 
+				$users = $results->fetch_all(MYSQLI_ASSOC); 
 
-				if (count($courses)>0) {
-					return $courses;
+				if (count($users)>0) {
+					return $users;
 				}else
 					return array(); 
 
@@ -62,21 +62,21 @@
 
 				if ($name!="" && $lastname!="" && $address!="" && $phone_number!="" && $email!="" && $password!="" && $role!="") {
 					
-					$query = "insert into users (name,lastname,address,phone_number,email,password,role) values(?,?,?,?,?,?,?)";
+					$query = "insert into users (name,lastname,address,phone_number,email,password,role) values (?,?,?,?,?,?,?)";
 					$prepared_query = $conn->prepare($query);
-					$prepared_query->bind_param('ssssssi',$name,$lastname,$address,$phone_number,$email,$password,$role);
+					$prepared_query->bind_param('sssssss',$name,$lastname,$address,$phone_number,$email,$password,$role);
 					if ($prepared_query->execute()) {
 						
 						header("Location:".BASE_PATH.'usuarios/?ok');
 
 					}else
-						header("Location:".BASE_PATH.'usuarios/?error');
+						header("Location:".BASE_PATH.'usuarios/?error1');
 
 				}else
-					header("Location:".BASE_PATH.'usuarios/?error');
+					header("Location:".BASE_PATH.'usuarios/?error2');
 
 			}else
-				header("Location:".BASE_PATH.'usuarios/?error');
+				header("Location:".BASE_PATH.'usuarios/?error3');
 		}
 	}
 	
