@@ -67,16 +67,77 @@
 					$prepared_query->bind_param('sssssss',$name,$lastname,$address,$phone_number,$email,$password,$role);
 					if ($prepared_query->execute()) {
 						
-						header("Location:".BASE_PATH.'usuarios/?ok');
+						$_SESSION['status'] = 'success';
+						$_SESSION['message'] = 'Registro guardado exitosamente.';
+						
+						header("Location:".BASE_PATH.'usuarios/');
 
-					}else
-						header("Location:".BASE_PATH.'usuarios/?error1');
+					}else{
+						
+						$_SESSION['status'] = 'error';
+						$_SESSION['message'] = 'ocurrio un error durante el proceso de guardado';
 
-				}else
-					header("Location:".BASE_PATH.'usuarios/?error2');
+						header("Location:".BASE_PATH.'usuarios/');
+					}
 
-			}else
-				header("Location:".BASE_PATH.'usuarios/?error3');
+				}else{
+
+					$_SESSION['status'] = 'error';
+					$_SESSION['message'] = 'verifique la información del formulario';
+
+					header("Location:".BASE_PATH.'usuarios/');
+				}
+
+			}else{
+				$_SESSION['status'] = 'error';
+				$_SESSION['message'] = 'verifique la conexión a la base de datos';
+
+				header("Location:".BASE_PATH.'usuarios/');
+			}
+		}
+
+		public function update($name,$lastname,$address,$phone_number,$email,$role,$id)
+		{
+			$conn = connect();
+			if (!$conn->connect_error) {
+				
+				if ($name!="" && $lastname!="" && $address!="" && $phone_number!="" && $email!="" && $role!="" && $id!="" ) {
+					$query = "update users set name = ?, lastname = ?, address = ?, phone_number = ?, email = ?, role = ?  where id = ?";
+					$prepared_query = $conn->prepare($query);
+					$prepared_query->bind_param('ssssssi',$name,$lastname,$address,$phone_number,$email,$role,$id);
+					if ($prepared_query->execute()) {
+						
+						$_SESSION['status'] = 'success';
+						$_SESSION['message'] = 'Registro actualizado exitosamente.';
+						
+						header("Location:".BASE_PATH.'usuarios/');
+
+					}else{
+						
+						$_SESSION['status'] = 'error';
+						$_SESSION['message'] = 'ocurrio un error durante el proceso de actualizado';
+
+						header("Location:".BASE_PATH.'usuarios/');
+					}
+
+
+				}else{ 
+
+					$_SESSION['status'] = 'error';
+					$_SESSION['message'] = 'verifique la información del formulario';
+
+					header("Location:".BASE_PATH.'usuarios/');
+				}
+
+			}else{
+
+				$_SESSION['status'] = 'error';
+				$_SESSION['message'] = 'verifique la conexión a la base de datos';
+
+				header("Location:".BASE_PATH.'usuarios/');
+
+			}
+
 		}
 	}
 	
