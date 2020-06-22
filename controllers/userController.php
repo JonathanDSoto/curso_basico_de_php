@@ -21,6 +21,17 @@
 
 					$userController->store($name,$lastname,$address,$phone_number,$email,$password,$role);
 				break; 
+				case 'update':
+					$name = strip_tags($_POST['name']);
+					$lastname = strip_tags($_POST['lastname']);
+					$address = strip_tags($_POST['address']);
+					$phone_number = strip_tags($_POST['phone_number']);
+					$email = strip_tags($_POST['email']);
+					$role = strip_tags($_POST['role']);
+					$id = strip_tags($_POST['id']);
+
+					$userController->update($name,$lastname,$address,$phone_number,$email,$role,$id);
+				break;
 			}
 		}
 	}
