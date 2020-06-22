@@ -15,17 +15,13 @@
 					//ejecutamos la función del controlador
 					$authController->login($email,$password);
 				break; 
+				case 'logout':
+					session_destroy();
+					header("Location:".BASE_PATH);
+				break;
 			}
 		}
-	}
-
-	//se deslogea y destruye la sesión
-	if (isset($_GET)) {
-		if (isset($_GET['logout'])) {
-			session_destroy();
-			header("Location:".BASE_PATH);
-		}
-	}
+	} 
 
 	//busca los datos del usuario y los almacena en la sesión
 	class AuthController
@@ -60,13 +56,26 @@
 						$_SESSION['role'] = $user['role'];
 
 						header("Location:".BASE_PATH."cursos");
-					}else
-						header("Location:".BASE_PATH."?error"); 
+					}else{
 
-				}else
-					header("Location:".BASE_PATH."?error");
-			}else
-				header("Location:".BASE_PATH."?error");
+						$_SESSION['status'] = 'error';
+						$_SESSION['message'] = 'Verifique su usuario o contraseña';
+
+						header("Location:".BASE_PATH."?error"); 
+					}
+
+				}else{
+					$_SESSION['status'] = 'error';
+					$_SESSION['message'] = 'verifique la información del formulario';
+
+					header("Location:".BASE_PATH."");
+				}
+			}else{
+				$_SESSION['status'] = 'error';
+				$_SESSION['message'] = 'verifique la conexión a la base de datos';
+
+				header("Location:".BASE_PATH."");
+			}
 		}
 	} 
 	

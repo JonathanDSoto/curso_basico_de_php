@@ -50,6 +50,11 @@
                                                         <i class="fa fa-pencil"></i>
                                                         Editar
                                                     </button>
+
+                                                    <button onclick="remove(<?= $course['id'] ?>)" class="btn btn-danger">
+                                                      <i class="fa fa-trash"></i>
+                                                      Eliminar
+                                                    </button>
                                                 </td> 
                                             </tr>  
                                             <?php endforeach ?> 
@@ -89,7 +94,7 @@
                 </button>
               </div>
 
-              <form action="<?= BASE_PATH ?>/controllers/courseController.php" method="post"> 
+              <form action="<?= BASE_PATH ?>courses" method="post"> 
                   <div class="modal-body">
                     
 
@@ -143,7 +148,7 @@
                 </button>
               </div>
 
-              <form action="<?= BASE_PATH ?>/controllers/courseController.php" method="post" name="formulario_actualizar" > 
+              <form action="<?= BASE_PATH ?>courses" method="post" name="formulario_actualizar" > 
                   <div class="modal-body">
                     
 
@@ -199,6 +204,32 @@
                 formulario.cover.value = cover1;
                 formulario.status.value = status1;
                 formulario.id.value  = id1;
+            }
+
+            function remove(id1)
+            {
+              swal({
+                title: "¿Desea eliminar el registro?",
+                text: "Una vez eliminado, no podrá recuperar el reigstro",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+
+                  swal("Poof! Your imaginary file has been deleted!", {
+                    icon: "success",
+                  });
+                  var nueva_ruta = '<?= BASE_PATH ?>courses?action=delete&id='+id1+'&token=<?= $_SESSION['token'] ?>'; 
+
+                  window.location.href = nueva_ruta;
+
+                } else {
+                  swal("","El registro no se ha eliminado","error");
+                }
+              });
+              console.log(id1)
             }
         </script>
     </body>

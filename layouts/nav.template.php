@@ -14,7 +14,11 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Settings</a><a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="<?= BASE_PATH."controllers/AuthController.php?logout" ?>">Logout</a>
+                        <a class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout_form').submit();" href="#">Logout</a>
+                        <form id="logout_form" method="post" action="<?= BASE_PATH."auth" ?>">
+                            <input type="hidden" name="action" value="logout">
+                            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                        </form>
                     </div>
                 </li>
             </ul>

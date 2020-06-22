@@ -1,0 +1,5 @@
+Options +FollowSymLinks  -MultiViews
+RewriteEngine on 
+
+RewriteRule ^auth controllers/AuthController.php
+RewriteRule ^courses controllers/courseController.php

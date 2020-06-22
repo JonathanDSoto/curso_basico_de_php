@@ -18,14 +18,45 @@
             <div id="layoutAuthentication_content">
                 <main>
                     <div class="container">
+
+                        <?php if (isset($_SESSION['status']) && $_SESSION['status']!= ""): ?>
+                        <div class="row">
+                            <div class="col"> 
+                                <?php if ($_SESSION['status']== "error"): ?> 
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                  <strong>Ha ocurrido un error!</strong> <?= $_SESSION['message'] ?>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <?php  endif; ?>
+
+                                <?php if ($_SESSION['status']== "success"): ?> 
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                  <strong>Proceso completado correctamente!</strong> <?= $_SESSION['message'] ?>
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php 
+                            unset($_SESSION['status']);
+                            unset($_SESSION['message']);
+                        ?>
+                        <?php endif; ?>
+
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header">
-                                    	<h3 class="text-center font-weight-light my-4">Login</h3>
+                                    	<h3 class="text-center font-weight-light my-4">
+                                            Login 
+                                        </h3>
                                     </div>
                                     <div class="card-body">
-                                        <form action="<?= BASE_PATH."controllers/AuthController.php" ?>" method="POST">
+                                        <form action="<?= BASE_PATH."auth" ?>" method="POST">
                                             
                                             <div class="form-group">
                                             	<label class="small mb-1" for="inputEmailAddress">Email</label>

@@ -2,7 +2,9 @@
 	include "config.php";  
 	include "connectionController.php";
 
-	
+	if (!isset($_SESSION['id'])) {
+		header("Location:".BASE_PATH);
+	}
 
 	if (isset($_POST['action'])) {
 		if (isset($_POST['token']) && $_POST['token'] == $_SESSION['token']) {
@@ -28,6 +30,22 @@
 					$courseController->update($name,$description,$cover,$status,$id);
 				break;
 			}
+		}
+	}
+
+	if (isset($_GET['action'])) {
+
+		if (isset($_GET['token']) && $_GET['token'] == $_SESSION['token']) {
+
+			$courseController = new CourseController();
+
+			switch ($_GET['action']) {
+				case 'delete':
+					$id = strip_tags($_GET['id']);
+					$courseController->delete($id);
+					break; 
+			}
+
 		}
 	}
 
@@ -128,6 +146,46 @@
 						header("Location:".BASE_PATH.'cursos/');
 					}
 
+
+				}else{ 
+
+					$_SESSION['status'] = 'error';
+					$_SESSION['message'] = 'verifique la información del formulario';
+
+					header("Location:".BASE_PATH.'cursos/');
+				}
+
+			}else{
+				$_SESSION['status'] = 'error';
+				$_SESSION['message'] = 'verifique la conexión a la base de datos';
+
+				header("Location:".BASE_PATH.'cursos/');
+			}
+		}
+
+		public function delete($id)
+		{
+			$conn = connect();
+			if (!$conn->connect_error) {
+
+				if ($id!="") {
+
+					$query = "delete from courses where id = ?";
+					$prepared_query = $conn->prepare($query);
+					$prepared_query->bind_param('i',$id);
+					if ($prepared_query->execute()) {
+						
+						$_SESSION['status'] = 'success';
+						$_SESSION['message'] = 'Registro eliminado exitosamente.';
+						
+						header("Location:".BASE_PATH.'cursos/');
+
+					}else{
+						$_SESSION['status'] = 'error';
+						$_SESSION['message'] = 'ocurrio un error durante el proceso de borrado';
+
+						header("Location:".BASE_PATH.'cursos/');
+					}
 
 				}else{ 
 
