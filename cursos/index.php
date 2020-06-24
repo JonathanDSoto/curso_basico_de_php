@@ -51,7 +51,7 @@
                                                         Editar
                                                     </button>
 
-                                                    <button onclick="remove(<?= $course['id'] ?>)" class="btn btn-danger">
+                                                    <button onclick="remove(<?= $course['id'] ?>,this)" class="btn btn-danger">
                                                       <i class="fa fa-trash"></i>
                                                       Eliminar
                                                     </button>
@@ -206,7 +206,7 @@
                 formulario.id.value  = id1;
             }
 
-            function remove(id1)
+            function remove(id1,target)
             {
               swal({
                 title: "¿Desea eliminar el registro?",
@@ -216,14 +216,27 @@
                 dangerMode: true,
               })
               .then((willDelete) => {
-                if (willDelete) {
+                if (willDelete) { 
 
-                  swal("Poof! Your imaginary file has been deleted!", {
-                    icon: "success",
-                  });
-                  var nueva_ruta = '<?= BASE_PATH ?>courses?action=delete&id='+id1+'&token=<?= $_SESSION['token'] ?>'; 
-
-                  window.location.href = nueva_ruta;
+                  $.ajax({ 
+                    url : '<?= BASE_PATH ?>courses', 
+                    data : { action : 'delete',id:id1,token:"<?= $_SESSION['token'] ?>" }, 
+                    type : 'POST', 
+                    dataType : 'json', 
+                    success : function(respuesta) {
+                      if (respuesta.code>0) {
+                        $(target).parent().parent().remove();
+                        swal(respuesta.message, { icon: "success", });
+                      }else{
+                        swal(respuesta.message, { icon: "error", }); 
+                      }
+                    }, 
+                    error : function(xhr, status) {
+                      console.log(xhr)
+                      console.log(status)
+                        swal(respuesta.message, { icon: "error", }); 
+                    }
+                  }); 
 
                 } else {
                   swal("","El registro no se ha eliminado","error");

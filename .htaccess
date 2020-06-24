@@ -3,3 +3,4 @@ RewriteEngine on
 
 RewriteRule ^auth controllers/AuthController.php
 RewriteRule ^courses controllers/courseController.php
+RewriteRule ^users controllers/userController.php

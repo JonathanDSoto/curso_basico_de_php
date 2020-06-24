@@ -1,4 +1,7 @@
 <?php 
+	error_reporting(0);
+	ini_set('display_errors', 0);
+
 	//se crea la sesión
 	if (!isset($_SESSION)) {
 		session_start();
@@ -6,7 +9,7 @@
 	
 	//se define una ruta base
 	if (!defined("BASE_PATH") ) {
-		define("BASE_PATH","http://localhost:8888/");
+		define("BASE_PATH","http://localhost/class/");
 	} 
 
 	//se genera un token
