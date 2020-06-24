@@ -36,6 +36,24 @@
 		}
 	}
 
+
+	if (isset($_GET['action'])) {
+
+		if (isset($_GET['token']) && $_GET['token'] == $_SESSION['token']) {
+
+			$userController = new UserController();
+
+			switch ($_GET['action']) {
+				case 'delete':
+					$id = strip_tags($_GET['id']);
+					$userController->delete($id);
+					break; 
+			}
+
+		}
+	}
+
+
 	//obtiene todos los usuarios existentes
 	class UserController
 	{
@@ -149,6 +167,46 @@
 
 			}
 
+		}
+
+		public function delete($id)
+		{
+			$conn = connect();
+			if (!$conn->connect_error) {
+
+				if ($id!="") {
+
+					$query = "delete from users where id = ?";
+					$prepared_query = $conn->prepare($query);
+					$prepared_query->bind_param('i',$id);
+					if ($prepared_query->execute()) {
+						
+						$_SESSION['status'] = 'success';
+						$_SESSION['message'] = 'Registro eliminado exitosamente.';
+						
+						header("Location:".BASE_PATH.'usuarios/');
+
+					}else{
+						$_SESSION['status'] = 'error';
+						$_SESSION['message'] = 'ocurrio un error durante el proceso de borrado';
+
+						header("Location:".BASE_PATH.'usuarios/');
+					}
+
+				}else{ 
+
+					$_SESSION['status'] = 'error';
+					$_SESSION['message'] = 'verifique la información del formulario';
+
+					header("Location:".BASE_PATH.'usuarios/');
+				}
+
+			}else{
+				$_SESSION['status'] = 'error';
+				$_SESSION['message'] = 'verifique la conexión a la base de datos';
+
+				header("Location:".BASE_PATH.'usuarios/');
+			}
 		}
 	}
 	
