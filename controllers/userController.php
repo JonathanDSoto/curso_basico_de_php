@@ -32,24 +32,11 @@
 
 					$userController->update($name,$lastname,$address,$phone_number,$email,$role,$id);
 				break;
-			}
-		}
-	}
-
-
-	if (isset($_GET['action'])) {
-
-		if (isset($_GET['token']) && $_GET['token'] == $_SESSION['token']) {
-
-			$userController = new UserController();
-
-			switch ($_GET['action']) {
 				case 'delete':
-					$id = strip_tags($_GET['id']);
-					$userController->delete($id);
-					break; 
+					$id = strip_tags($_POST['id']);
+					echo json_encode($userController->delete($id));
+				break; 
 			}
-
 		}
 	}
 
@@ -181,31 +168,41 @@
 					$prepared_query->bind_param('i',$id);
 					if ($prepared_query->execute()) {
 						
-						$_SESSION['status'] = 'success';
-						$_SESSION['message'] = 'Registro eliminado exitosamente.';
-						
-						header("Location:".BASE_PATH.'usuarios/');
+						$respuesta = array(
+						    "code" => 200,
+						    'status' => 'success',
+						    'message' => 'Registro eliminado exitosamente'
+						);
+						return $respuesta; 
 
-					}else{
-						$_SESSION['status'] = 'error';
-						$_SESSION['message'] = 'ocurrio un error durante el proceso de borrado';
+					}else{ 
 
-						header("Location:".BASE_PATH.'usuarios/');
+						$respuesta = array(
+						    "code" => -200,
+						    'status' => 'error',
+						    'message' => 'ocurrio un error durante el proceso de borrado'
+						);
+						return $respuesta; 
 					}
 
-				}else{ 
+				}else{  
 
-					$_SESSION['status'] = 'error';
-					$_SESSION['message'] = 'verifique la información del formulario';
-
-					header("Location:".BASE_PATH.'usuarios/');
+					$respuesta = array(
+					    "code" => -200,
+					    'status' => 'error',
+					    'message' => 'verifique la información del formulario'
+					);
+					return $respuesta;
 				}
 
-			}else{
-				$_SESSION['status'] = 'error';
-				$_SESSION['message'] = 'verifique la conexión a la base de datos';
+			}else{ 
 
-				header("Location:".BASE_PATH.'usuarios/');
+				$respuesta = array(
+				    "code" => -200,
+				    'status' => 'error',
+				    'message' => 'verifique la conexión a la base de datos'
+				);
+				return $respuesta; 
 			}
 		}
 	}

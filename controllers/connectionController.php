@@ -1,7 +1,7 @@
 <?php 
 	define("HOST", "localhost");
 	define("USER", "root");
-	define("PASSWORD", "");
+	define("PASSWORD", "root");
 	define("BD", "class");
 
 	//realiza una conexion a la base de datos
