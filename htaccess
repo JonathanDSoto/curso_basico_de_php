@@ -1,0 +1,7 @@
+Options +FollowSymLinks  -MultiViews
+RewriteEngine on 
+
+RewriteRule ^auth controllers/AuthController.php
+RewriteRule ^progress controllers/progressController.php
+RewriteRule ^recipe controllers/recipeController.php
+RewriteRule ^reference controllers/referenceController.php
